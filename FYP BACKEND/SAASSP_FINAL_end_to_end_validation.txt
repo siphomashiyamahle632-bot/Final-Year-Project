@@ -1,0 +1,96 @@
+SAASSP FINAL END-TO-END VALIDATION
+==================================================
+Schema: SAASSP Schema(1).sql
+Dataset: SAASSP_synthetic_dataset_FINAL.sql
+
+ROW COUNTS
+- users: 1003
+- programmes: 1
+- students: 1000
+- academic_staff: 2
+- modules: 10
+- student_module_results: 5111
+- prerequisites: 9
+- co_requisites: 1
+- risk_predictions: 0
+- attendance: 5111
+- assessments: 15333
+- student_risk_labels: 1000
+
+VALIDATION CHECKS
+[PASS] Uses SAASSP database
+[PASS] Does not use/create academic_advisor
+[PASS] All 11 authoritative schema tables present
+[PASS] No placeholder password hashes
+[PASS] users row count = 1003 — actual=1003
+[PASS] programmes row count = 1 — actual=1
+[PASS] students row count = 1000 — actual=1000
+[PASS] academic_staff row count = 2 — actual=2
+[PASS] modules row count = 10 — actual=10
+[PASS] student_module_results row count = 5111 — actual=5111
+[PASS] prerequisites row count = 9 — actual=9
+[PASS] co_requisites row count = 1 — actual=1
+[PASS] risk_predictions row count = 0 — actual=0
+[PASS] attendance row count = 5111 — actual=5111
+[PASS] assessments row count = 15333 — actual=15333
+[PASS] users PK unique
+[PASS] programmes PK unique
+[PASS] students PK unique
+[PASS] academic_staff PK unique
+[PASS] modules PK unique
+[PASS] student_module_results PK unique
+[PASS] prerequisites PK unique
+[PASS] co_requisites PK unique
+[PASS] risk_predictions PK unique
+[PASS] attendance PK unique
+[PASS] assessments PK unique
+[PASS] Usernames unique
+[PASS] Roles satisfy schema
+[PASS] Role counts correct
+[PASS] Administrator demo password verifies
+[PASS] staff1 demo password verifies
+[PASS] staff2 demo password verifies
+[PASS] Student demo password verifies
+[PASS] Student numbers unique
+[PASS] Student programme FKs valid
+[PASS] Student user FKs valid/unique
+[PASS] Student usernames match student numbers
+[PASS] Student linked user roles correct
+[PASS] Academic staff numbers unique
+[PASS] Academic staff programme FKs valid
+[PASS] Academic staff user FKs valid/unique
+[PASS] Academic staff linked roles correct
+[PASS] Module programme FKs valid
+[PASS] Module codes unique
+[PASS] Module constraints valid
+[PASS] Prerequisite FKs valid/no self-reference/unique
+[PASS] Co-requisite FKs valid/no self-reference/unique
+[PASS] Result FKs valid
+[PASS] Result student/module/year unique
+[PASS] Result marks in schema ranges
+[PASS] Final mark formula correct
+[PASS] Pass/Fail classification correct
+[PASS] Attendance has exactly one valid row per result
+[PASS] Assessments have valid result FKs
+[PASS] Exactly 3 assessments per result
+[PASS] Assessment marks/weights valid
+[PASS] Assessment weights sum to 100
+[PASS] Continuous assessment equals weighted assessments
+[PASS] Prerequisite consistency — violations=0
+[PASS] Co-requisite consistency — violations=0
+[PASS] Exactly one ML label per student
+[PASS] ML labels consistent with cleaned histories — errors=0
+[PASS] risk_predictions empty before model runtime
+[PASS] ml_feature_set exists
+[PASS] ml_feature_set uses strictly prior academic years
+[PASS] ml_feature_set target restricted to ML-eligible labels
+
+ML SUMMARY
+- Risk distribution: {'Low': 716, 'Medium': 90, 'High': 194}
+- ML-eligible students: 636
+- Eligible risk distribution: {'Low': 510, 'Medium': 86, 'High': 40}
+
+FINAL RESULT
+- Passed: 66/66
+- Failed: 0
+- Status: VALIDATED

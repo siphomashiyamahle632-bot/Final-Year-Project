@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About SAASSP | Smart Academic Advisory & Student Success Platform</title>
+  <style>
+    :root {
+      --primary: #173f5f;
+      --primary-dark: #102f47;
+      --accent: #2f80ed;
+      --background: #f7faff;
+      --text: #1f2937;
+      --muted: #667085;
+      --white: #ffffff;
+      --border: #e4e7ec;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.5;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-text small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 600;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      color: #475467;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-button {
+      display: none;
+      border: none;
+      background: none;
+      color: var(--primary);
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    .button {
+      min-height: 45px;
+      padding: 0 21px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .button-primary:hover { background: var(--primary-dark); }
+
+    .button-outline {
+      background: var(--white);
+      border-color: #cfd5dc;
+      color: var(--primary);
+    }
+
+    .button-outline:hover { background: var(--background); }
+
+    .about-hero {
+      background: linear-gradient(135deg, #f7faff 0%, #ffffff 100%);
+      padding: 80px 0 70px;
+      text-align: center;
+    }
+
+    .about-label {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      margin-bottom: 15px;
+    }
+
+    .about-hero h1 {
+      color: var(--primary);
+      font-size: clamp(38px, 6vw, 55px);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .about-hero p {
+      max-width: 760px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .about-content { padding: 70px 0; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .about-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      background: var(--white);
+    }
+
+    .card-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      background: #edf4ff;
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .about-card h2 {
+      color: var(--primary);
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .purpose {
+      background: var(--primary);
+      color: var(--white);
+      padding: 65px 0;
+      text-align: center;
+    }
+
+    .purpose h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .purpose p {
+      max-width: 760px;
+      margin: auto;
+      color: #dce8f2;
+      font-size: 15px;
+    }
+
+    .scope-note {
+      margin: 25px auto 0;
+      max-width: 760px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 10px;
+      color: #eef5fa;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .purpose-actions {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .purpose-actions .button {
+      background: var(--white);
+      color: var(--primary);
+    }
+
+    footer {
+      background: var(--primary-dark);
+      color: #dce8f2;
+      padding: 28px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 12px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .menu-button { display: block; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-actions { display: none; }
+      .about-hero { padding: 65px 0 55px; }
+      .about-hero h1 { font-size: 39px; }
+      .about-hero p { font-size: 15px; }
+      .about-content { padding: 55px 0; }
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        <div class="logo-icon">S</div>
+        <div class="logo-text">
+          SAASSP
+          <small>Academic Advisory & Student Success</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="button button-outline">Login</a>
+        <a href="register.html" class="button button-primary">Create Account</a>
+      </div>
+
+      <button class="menu-button" onclick="toggleMenu()" aria-label="Open navigation" aria-expanded="false">☰</button>
+
+    </div>
+  </header>
+
+  <main>
+
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-label">About SAASSP</div>
+
+        <h1>Smart Academic Advisory & Student Success Platform</h1>
+
+        <p>
+          SAASSP is a web-based academic decision-support platform designed
+          to help university students make informed academic decisions,
+          understand their academic progress, and plan their studies more effectively.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-content">
+      <div class="container">
+        <div class="about-grid">
+
+          <article class="about-card">
+            <div class="card-number">01</div>
+            <h2>What is SAASSP?</h2>
+            <p>
+              SAASSP is a web-based academic decision-support platform that
+              brings programme structures, module requirements and student
+              academic information together to provide understandable academic guidance.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <div class="card-number">02</div>
+            <h2>What does it do?</h2>
+            <p>
+              The platform supports module planning, prerequisite and co-requisite
+              checking, rule-based module recommendations, credit calculations,
+              indicative qualification-progress monitoring, dashboards and
+              academic-risk insights.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <div class="card-number">03</div>
+            <h2>What does it aim to achieve?</h2>
+            <p>
+              SAASSP aims to improve academic decision-making, provide timely
+              decision support, help identify potential academic difficulties earlier,
+              and support students in progressing toward completion of their qualification.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="purpose">
+      <div class="container">
+
+        <h2>Supporting better academic decisions</h2>
+
+        <p>
+          SAASSP combines rule-based academic advising with an experimental
+          machine-learning component for academic-risk classification. The
+          machine-learning component is developed and evaluated using synthetic
+          student profiles.
+        </p>
+
+        <div class="scope-note">
+          <strong>Important:</strong> SAASSP is a decision-support platform.
+          It does not replace academic staff, perform official university registration,
+          connect to live university systems in the prototype, or make official
+          graduation-eligibility decisions. Qualification progress shown by the
+          platform is indicative.
+        </div>
+
+        <div class="purpose-actions">
+          <a href="register.html" class="button">Create Account</a>
+          <a href="index.html" class="button">Back to Home</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">SAASSP</div>
+        <div>Smart Academic Advisory & Student Success Platform</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector(".nav-links");
+      const menuButton = document.querySelector(".menu-button");
+      const isOpen = nav.classList.contains("mobile-open");
+
+      if (isOpen) {
+        nav.classList.remove("mobile-open");
+        nav.style.display = "none";
+        menuButton.setAttribute("aria-expanded", "false");
+      } else {
+        nav.classList.add("mobile-open");
+        nav.style.display = "flex";
+        nav.style.flexDirection = "column";
+        nav.style.position = "absolute";
+        nav.style.top = "74px";
+        nav.style.left = "0";
+        nav.style.right = "0";
+        nav.style.background = "#ffffff";
+        nav.style.padding = "20px";
+        nav.style.borderBottom = "1px solid #e4e7ec";
+        nav.style.alignItems = "flex-start";
+        nav.style.gap = "18px";
+        menuButton.setAttribute("aria-expanded", "true");
+      }
+    }
+
+    document.querySelectorAll(".nav-links a").forEach(function(link) {
+      link.addEventListener("click", function() {
+        if (window.innerWidth <= 900) {
+          const nav = document.querySelector(".nav-links");
+          const menuButton = document.querySelector(".menu-button");
+          nav.classList.remove("mobile-open");
+          nav.style.display = "none";
+          menuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    window.addEventListener("resize", function() {
+      const nav = document.querySelector(".nav-links");
+      const menuButton = document.querySelector(".menu-button");
+
+      if (window.innerWidth > 900) {
+        nav.classList.remove("mobile-open");
+        nav.style.display = "";
+        nav.style.flexDirection = "";
+        nav.style.position = "";
+        nav.style.top = "";
+        nav.style.left = "";
+        nav.style.right = "";
+        nav.style.background = "";
+        nav.style.padding = "";
+        nav.style.borderBottom = "";
+        nav.style.alignItems = "";
+        nav.style.gap = "";
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+  </script>
+
+</body>
+</html>

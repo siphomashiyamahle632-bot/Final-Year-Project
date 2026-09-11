@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SAASSP | Smart Academic Advisory & Student Success Platform</title>
+
+  <style>
+    /* =========================
+       GLOBAL STYLES
+    ========================== */
+
+    :root {
+      --primary: #173f5f;
+      --primary-dark: #102f47;
+      --accent: #2f80ed;
+      --background: #f7faff;
+      --text: #1f2937;
+      --muted: #667085;
+      --white: #ffffff;
+      --border: #e4e7ec;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-text small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 600;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      color: #475467;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-button {
+      display: none;
+      border: none;
+      background: none;
+      color: var(--primary);
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .button {
+      min-height: 45px;
+      padding: 0 21px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button-outline {
+      background: var(--white);
+      border-color: #cfd5dc;
+      color: var(--primary);
+    }
+
+    .button-outline:hover {
+      background: var(--background);
+    }
+
+    /* =========================
+       HERO / LANDING SECTION
+    ========================== */
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(
+          135deg,
+          #f7faff 0%,
+          #ffffff 58%,
+          #f1f6fc 100%
+        );
+      padding: 70px 0;
+    }
+
+    .hero-content {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .hero-label {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      color: var(--primary);
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      max-width: 720px;
+      margin: 0 auto 32px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================
+       ACADEMIC JOURNEY
+    ========================== */
+
+    .journey {
+      padding: 65px 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+
+    .journey-title {
+      text-align: center;
+      color: var(--primary);
+      font-size: 23px;
+      margin-bottom: 38px;
+    }
+
+    .journey-line {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 900px;
+      margin: auto;
+      position: relative;
+    }
+
+    .journey-line::before {
+      content: "";
+      position: absolute;
+      top: 25px;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      background: #dbe5ef;
+      z-index: 0;
+    }
+
+    .journey-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .journey-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+      border: 5px solid var(--white);
+      box-shadow: 0 0 0 1px #dbe5ef;
+    }
+
+    .journey-step h3 {
+      color: var(--primary);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .journey-step p {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 0 8px;
+    }
+
+    /* =========================
+       CALL TO ACTION
+    ========================== */
+
+    .cta {
+      padding: 75px 0;
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      max-width: 620px;
+      margin: 0 auto 25px;
+      color: #dce8f2;
+      font-size: 15px;
+    }
+
+    .cta .button {
+      background: var(--white);
+      color: var(--primary);
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: var(--primary-dark);
+      color: #dce8f2;
+      padding: 28px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 12px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    /* =========================
+       RESPONSIVE DESIGN
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .features > .container > div:last-child,
+      #how-it-works .container > div:last-child {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .journey-line {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 35px;
+      }
+
+      .journey-line::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .features > .container > div:last-child,
+      #how-it-works .container > div:last-child {
+        grid-template-columns: 1fr !important;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 80px 0;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .journey {
+        padding: 55px 0;
+      }
+
+      .journey-line {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px 10px;
+      }
+
+      .cta h2 {
+        font-size: 27px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <header>
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        <div class="logo-icon">S</div>
+
+        <div class="logo-text">
+          SAASSP
+          <small>Academic Advisory & Student Success</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="button button-outline">Login</a>
+        <a href="register.html" class="button button-primary">
+          Create Account
+        </a>
+      </div>
+
+      <button class="menu-button" onclick="toggleMenu()" aria-label="Open navigation" aria-expanded="false">
+        ☰
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       LANDING / HERO
+  ========================== -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="hero-content">
+
+          <div class="hero-label">
+            Smart Academic Advisory & Student Success Platform
+          </div>
+
+          <h1>
+            Your academic journey,
+            <span>supported.</span>
+          </h1>
+
+          <p class="hero-description">
+            SAASSP helps university students make informed academic
+            decisions, plan their studies and stay on track from
+            registration to graduation.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="login.html" class="button button-primary">
+              Login
+            </a>
+
+            <a href="register.html" class="button button-outline">
+              Create Account
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACADEMIC JOURNEY
+    ========================== -->
+
+    <section class="journey">
+
+      <div class="container">
+
+        <h2 class="journey-title">
+          Supporting the academic journey
+        </h2>
+
+        <div class="journey-line">
+
+          <div class="journey-step">
+            <div class="journey-icon">01</div>
+            <h3>Registration</h3>
+            <p>
+              Begin your academic journey with the right information.
+            </p>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-icon">02</div>
+            <h3>Planning</h3>
+            <p>
+              Make informed decisions about your academic pathway.
+            </p>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-icon">03</div>
+            <h3>Progress</h3>
+            <p>
+              Monitor your academic performance and progress.
+            </p>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-icon">04</div>
+            <h3>Graduation</h3>
+            <p>
+              Understand your progress towards completing your programme.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="features" id="features" style="padding: 65px 0; background: #f7faff;">
+      <div class="container">
+
+        <div style="text-align:center; max-width:700px; margin:0 auto 35px;">
+          <div class="hero-label">Platform Features</div>
+          <h2 style="color:#173f5f; font-size:32px; margin-bottom:12px;">
+            Academic support in one platform
+          </h2>
+          <p style="color:#667085; font-size:15px;">
+            SAASSP is designed to support informed academic decisions throughout the student journey.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
+
+          <div style="background:#fff; border:1px solid #e4e7ec; border-radius:12px; padding:22px;">
+            <h3 style="color:#173f5f; font-size:16px; margin-bottom:8px;">Academic Planning</h3>
+            <p style="color:#667085; font-size:13px;">
+              Support informed module and workload planning using academic information.
+            </p>
+          </div>
+
+          <div style="background:#fff; border:1px solid #e4e7ec; border-radius:12px; padding:22px;">
+            <h3 style="color:#173f5f; font-size:16px; margin-bottom:8px;">Progress Tracking</h3>
+            <p style="color:#667085; font-size:13px;">
+              Help students understand their academic progress and outstanding requirements.
+            </p>
+          </div>
+
+          <div style="background:#fff; border:1px solid #e4e7ec; border-radius:12px; padding:22px;">
+            <h3 style="color:#173f5f; font-size:16px; margin-bottom:8px;">Risk Prediction</h3>
+            <p style="color:#667085; font-size:13px;">
+              Use machine learning to identify patterns associated with academic risk.
+            </p>
+          </div>
+
+          <div style="background:#fff; border:1px solid #e4e7ec; border-radius:12px; padding:22px;">
+            <h3 style="color:#173f5f; font-size:16px; margin-bottom:8px;">AI Academic Advisor</h3>
+            <p style="color:#667085; font-size:13px;">
+              Provide accessible academic guidance through an AI-powered advisory interface.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section id="how-it-works" style="padding:65px 0;">
+      <div class="container">
+
+        <div style="text-align:center; max-width:700px; margin:0 auto 35px;">
+          <div class="hero-label">How It Works</div>
+          <h2 style="color:#173f5f; font-size:32px; margin-bottom:12px;">
+            From registration to graduation
+          </h2>
+          <p style="color:#667085; font-size:15px;">
+            The platform is designed to minimise unnecessary manual data entry by using the student's university information.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;">
+
+          <div style="text-align:center; padding:18px;">
+            <div class="journey-icon">01</div>
+            <h3 style="color:#173f5f; font-size:15px; margin-bottom:6px;">Create Account</h3>
+            <p style="color:#667085; font-size:13px;">
+              The student provides identifying university details to register with SAASSP.
+            </p>
+          </div>
+
+          <div style="text-align:center; padding:18px;">
+            <div class="journey-icon">02</div>
+            <h3 style="color:#173f5f; font-size:15px; margin-bottom:6px;">Verify Information</h3>
+            <p style="color:#667085; font-size:13px;">
+              The intended system verifies the student and retrieves relevant academic information.
+            </p>
+          </div>
+
+          <div style="text-align:center; padding:18px;">
+            <div class="journey-icon">03</div>
+            <h3 style="color:#173f5f; font-size:15px; margin-bottom:6px;">Analyse & Advise</h3>
+            <p style="color:#667085; font-size:13px;">
+              Academic information is used for planning, progress monitoring and risk analysis.
+            </p>
+          </div>
+
+          <div style="text-align:center; padding:18px;">
+            <div class="journey-icon">04</div>
+            <h3 style="color:#173f5f; font-size:15px; margin-bottom:6px;">Support Success</h3>
+            <p style="color:#667085; font-size:13px;">
+              Students receive recommendations and AI-assisted academic guidance.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         CALL TO ACTION
+    ========================== -->
+
+    <section class="cta">
+
+      <div class="container">
+
+        <h2>Ready to take control of your academic journey?</h2>
+
+        <p>
+          Access SAASSP to receive academic guidance and make
+          informed decisions throughout your university studies.
+        </p>
+
+        <a href="register.html" class="button">
+          Get Started
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container footer-content">
+
+      <div>
+        <div class="footer-brand">SAASSP</div>
+        <div>
+          Smart Academic Advisory & Student Success Platform
+        </div>
+      </div>
+
+      <div>
+        Final Year Project Prototype
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    function toggleMenu() {
+
+      const nav = document.querySelector(".nav-links");
+      const menuButton = document.querySelector(".menu-button");
+
+      const isOpen = nav.classList.contains("mobile-open");
+
+      if (isOpen) {
+
+        nav.classList.remove("mobile-open");
+        nav.style.display = "none";
+        menuButton.setAttribute("aria-expanded", "false");
+
+      } else {
+
+        nav.classList.add("mobile-open");
+        nav.style.display = "flex";
+        nav.style.flexDirection = "column";
+        nav.style.position = "absolute";
+        nav.style.top = "74px";
+        nav.style.left = "0";
+        nav.style.right = "0";
+        nav.style.background = "#ffffff";
+        nav.style.padding = "20px";
+        nav.style.borderBottom = "1px solid #e4e7ec";
+        nav.style.alignItems = "flex-start";
+        nav.style.gap = "18px";
+
+        menuButton.setAttribute("aria-expanded", "true");
+      }
+
+    }
+
+    // Close the mobile menu after selecting a navigation link.
+    document.querySelectorAll(".nav-links a").forEach(function(link) {
+      link.addEventListener("click", function() {
+        const nav = document.querySelector(".nav-links");
+        const menuButton = document.querySelector(".menu-button");
+
+        if (window.innerWidth <= 900) {
+          nav.classList.remove("mobile-open");
+          nav.style.display = "none";
+          menuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    // Reset mobile navigation when returning to desktop size.
+    window.addEventListener("resize", function() {
+      const nav = document.querySelector(".nav-links");
+      const menuButton = document.querySelector(".menu-button");
+
+      if (window.innerWidth > 900) {
+        nav.classList.remove("mobile-open");
+        nav.style.display = "";
+        nav.style.flexDirection = "";
+        nav.style.position = "";
+        nav.style.top = "";
+        nav.style.left = "";
+        nav.style.right = "";
+        nav.style.background = "";
+        nav.style.padding = "";
+        nav.style.borderBottom = "";
+        nav.style.alignItems = "";
+        nav.style.gap = "";
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+
+  </script>
+
+</body>
+</html>

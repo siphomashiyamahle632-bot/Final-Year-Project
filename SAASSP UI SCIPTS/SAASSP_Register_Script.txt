@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | SAASSP</title>
+
+  <style>
+    :root {
+      --primary: #173f5f;
+      --primary-dark: #102f47;
+      --accent: #2f80ed;
+      --background: #f7faff;
+      --text: #1f2937;
+      --muted: #667085;
+      --white: #ffffff;
+      --border: #e4e7ec;
+      --danger: #b42318;
+      --success: #067647;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-text small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 600;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      color: #475467;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button {
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button-outline {
+      background: var(--white);
+      border-color: #cfd5dc;
+      color: var(--primary);
+    }
+
+    .button-outline:hover {
+      background: var(--background);
+    }
+
+    .menu-button {
+      display: none;
+      border: none;
+      background: none;
+      color: var(--primary);
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       REGISTRATION PAGE
+    ========================== */
+
+    .register-page {
+      min-height: calc(100vh - 74px);
+      padding: 54px 0 70px;
+    }
+
+    .register-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .register-intro {
+      padding: 38px 10px 20px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      margin-bottom: 14px;
+    }
+
+    .register-intro h1 {
+      color: var(--primary);
+      font-size: clamp(38px, 5vw, 54px);
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .register-intro p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 520px;
+    }
+
+    .intro-points {
+      margin-top: 30px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .intro-point {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #475467;
+      font-size: 14px;
+    }
+
+    .intro-icon {
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #edf4ff;
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .register-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 34px;
+      box-shadow: 0 12px 35px rgba(16, 47, 71, 0.08);
+    }
+
+    .register-card h2 {
+      color: var(--primary);
+      font-size: 25px;
+      margin-bottom: 7px;
+    }
+
+    .register-card .subtext {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 26px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 46px;
+      border: 1px solid #cfd5dc;
+      border-radius: 8px;
+      padding: 0 13px;
+      font: inherit;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(47,128,237,.10);
+    }
+
+    .helper {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 6px;
+    }
+
+    .role-note {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 14px;
+      color: #475467;
+      font-size: 12px;
+      margin: -2px 0 18px;
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 72px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin: 4px 0 22px;
+      color: #475467;
+      font-size: 12px;
+    }
+
+    .checkbox-row input {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .checkbox-row a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .submit-button {
+      width: 100%;
+      border: none;
+      min-height: 48px;
+    }
+
+    .signin-link {
+      text-align: center;
+      margin-top: 19px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .signin-link a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 13px;
+    }
+
+    .message.error {
+      display: block;
+      color: var(--danger);
+      background: #fff5f4;
+      border: 1px solid #fecdca;
+    }
+
+    .message.success {
+      display: block;
+      color: var(--success);
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+    }
+
+    footer {
+      background: var(--primary-dark);
+      color: #dce8f2;
+      padding: 26px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .register-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .register-intro {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .register-intro p {
+        margin: auto;
+      }
+
+      .intro-points {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-actions {
+        display: none;
+      }
+
+      .register-page {
+        padding-top: 35px;
+      }
+
+      .register-card {
+        padding: 24px 18px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        <div class="logo-icon">S</div>
+        <div class="logo-text">
+          SAASSP
+          <small>Academic Advisory & Student Success</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="button button-outline">Login</a>
+      </div>
+
+      <button class="menu-button"
+              onclick="toggleMenu()"
+              aria-label="Open navigation"
+              aria-expanded="false">
+        ☰
+      </button>
+
+    </div>
+  </header>
+
+  <main class="register-page">
+    <div class="container register-layout">
+
+      <section class="register-intro">
+
+        <div class="eyebrow">Create your SAASSP account</div>
+
+        <h1>
+          Start making informed academic decisions.
+        </h1>
+
+        <p>
+          Create an account to access SAASSP's academic decision-support
+          features. The prototype uses configured programme information and
+          synthetic academic records for development and demonstration.
+        </p>
+
+        <div class="intro-points">
+
+          <div class="intro-point">
+            <div class="intro-icon">01</div>
+            <div>
+              <strong>Plan modules</strong><br>
+              Check prerequisite and co-requisite requirements.
+            </div>
+          </div>
+
+          <div class="intro-point">
+            <div class="intro-icon">02</div>
+            <div>
+              <strong>Review progress</strong><br>
+              View indicative credits and qualification progress.
+            </div>
+          </div>
+
+          <div class="intro-point">
+            <div class="intro-icon">03</div>
+            <div>
+              <strong>Receive decision support</strong><br>
+              Access rule-based recommendations and academic-risk insights.
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="register-card">
+
+        <h2>Create Account</h2>
+        <p class="subtext">
+          Enter your details below. Fields marked with * are required.
+        </p>
+
+        <div id="formMessage" class="message"></div>
+
+        <form id="registerForm" novalidate>
+
+          <div class="form-row">
+
+            <div class="form-group">
+              <label for="firstName">First Name <span class="required">*</span></label>
+              <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name <span class="required">*</span></label>
+              <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="role">Account Type <span class="required">*</span></label>
+            <select id="role" name="role" required>
+              <option value="">Select account type</option>
+              <option value="student">Student</option>
+              <option value="academic-staff">Academic Staff</option>
+            </select>
+          </div>
+
+          <div class="role-note">
+            System administrator accounts are managed separately and are not created through public registration.
+          </div>
+
+          <div class="form-group">
+            <label id="identifierLabel" for="identifier">
+              Student / Staff Number <span class="required">*</span>
+            </label>
+            <input type="text" id="identifier" name="identifier" required>
+            <div id="identifierHelp" class="helper">
+              Select an account type to continue.
+            </div>
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-group">
+              <label for="password">Password <span class="required">*</span></label>
+              <div class="password-wrap">
+                <input type="password" id="password" name="password" minlength="8" autocomplete="new-password" required>
+                <button class="show-password" type="button" onclick="togglePassword('password', this)">Show</button>
+              </div>
+              <div class="helper">Use at least 8 characters.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+              <div class="password-wrap">
+                <input type="password" id="confirmPassword" name="confirmPassword" minlength="8" autocomplete="new-password" required>
+                <button class="show-password" type="button" onclick="togglePassword('confirmPassword', this)">Show</button>
+              </div>
+            </div>
+
+          </div>
+
+          <label class="checkbox-row">
+            <input type="checkbox" id="terms" required>
+            <span>
+              I understand that SAASSP provides academic decision support and
+              does not make official registration or graduation decisions.
+            </span>
+          </label>
+
+          <button type="submit" class="button button-primary submit-button">
+            Create Account
+          </button>
+
+          <div class="signin-link">
+            Already have an account?
+            <a href="login.html">Login</a>
+          </div>
+
+        </form>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <div class="footer-brand">SAASSP</div>
+        <div>Smart Academic Advisory & Student Success Platform</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const role = document.getElementById("role");
+    const identifierLabel = document.getElementById("identifierLabel");
+    const identifierHelp = document.getElementById("identifierHelp");
+
+    role.addEventListener("change", function() {
+      if (this.value === "student") {
+        identifierLabel.innerHTML = 'Student Number <span class="required">*</span>';
+        identifierHelp.textContent =
+          "Enter the student number used for this SAASSP prototype account.";
+      } else if (this.value === "academic-staff") {
+        identifierLabel.innerHTML = 'Staff Number <span class="required">*</span>';
+        identifierHelp.textContent =
+          "Enter the staff identifier used for this SAASSP prototype account.";
+      } else {
+        identifierLabel.innerHTML =
+          'Student / Staff Number <span class="required">*</span>';
+        identifierHelp.textContent =
+          "Select an account type to continue.";
+      }
+    });
+
+    function togglePassword(fieldId, button) {
+      const field = document.getElementById(fieldId);
+
+      if (field.type === "password") {
+        field.type = "text";
+        button.textContent = "Hide";
+      } else {
+        field.type = "password";
+        button.textContent = "Show";
+      }
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const message = document.getElementById("formMessage");
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const terms = document.getElementById("terms").checked;
+
+      message.className = "message";
+      message.textContent = "";
+
+      if (!this.checkValidity()) {
+        message.className = "message error";
+        message.textContent = "Please complete all required fields correctly.";
+        this.reportValidity();
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        message.className = "message error";
+        message.textContent = "The passwords do not match.";
+        return;
+      }
+
+      if (!terms) {
+        message.className = "message error";
+        message.textContent = "Please confirm the decision-support notice before continuing.";
+        return;
+      }
+
+      message.className = "message success";
+      message.textContent =
+        "Account details validated. Backend account creation will be connected during application integration.";
+    });
+
+    function toggleMenu() {
+      const nav = document.querySelector(".nav-links");
+      const menuButton = document.querySelector(".menu-button");
+      const isOpen = nav.classList.contains("mobile-open");
+
+      if (isOpen) {
+        nav.classList.remove("mobile-open");
+        nav.style.display = "none";
+        menuButton.setAttribute("aria-expanded", "false");
+      } else {
+        nav.classList.add("mobile-open");
+        nav.style.display = "flex";
+        nav.style.flexDirection = "column";
+        nav.style.position = "absolute";
+        nav.style.top = "74px";
+        nav.style.left = "0";
+        nav.style.right = "0";
+        nav.style.background = "#ffffff";
+        nav.style.padding = "20px";
+        nav.style.borderBottom = "1px solid #e4e7ec";
+        nav.style.alignItems = "flex-start";
+        nav.style.gap = "18px";
+        menuButton.setAttribute("aria-expanded", "true");
+      }
+    }
+
+    window.addEventListener("resize", function() {
+      const nav = document.querySelector(".nav-links");
+      const menuButton = document.querySelector(".menu-button");
+
+      if (window.innerWidth > 900) {
+        nav.classList.remove("mobile-open");
+        nav.style.display = "";
+        nav.style.flexDirection = "";
+        nav.style.position = "";
+        nav.style.top = "";
+        nav.style.left = "";
+        nav.style.right = "";
+        nav.style.background = "";
+        nav.style.padding = "";
+        nav.style.borderBottom = "";
+        nav.style.alignItems = "";
+        nav.style.gap = "";
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+  </script>
+
+</body>
+</html>

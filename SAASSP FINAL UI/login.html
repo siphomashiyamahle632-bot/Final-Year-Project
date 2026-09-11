@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | SAASSP</title>
+
+  <style>
+    :root {
+      --primary: #173f5f;
+      --primary-dark: #102f47;
+      --accent: #2f80ed;
+      --background: #f7faff;
+      --text: #1f2937;
+      --muted: #667085;
+      --white: #ffffff;
+      --border: #e4e7ec;
+      --danger: #b42318;
+      --success: #067647;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .logo-text small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 600;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      color: #475467;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button {
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .button-outline {
+      background: var(--white);
+      border-color: #cfd5dc;
+      color: var(--primary);
+    }
+
+    .button-outline:hover {
+      background: var(--background);
+    }
+
+    .menu-button {
+      display: none;
+      border: none;
+      background: none;
+      color: var(--primary);
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       LOGIN PAGE
+    ========================== */
+
+    .login-page {
+      min-height: calc(100vh - 74px);
+      padding: 60px 0 75px;
+      display: flex;
+      align-items: center;
+    }
+
+    .login-layout {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .login-intro .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      margin-bottom: 14px;
+    }
+
+    .login-intro h1 {
+      color: var(--primary);
+      font-size: clamp(40px, 5vw, 56px);
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .login-intro p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 540px;
+    }
+
+    .support-box {
+      margin-top: 30px;
+      max-width: 520px;
+      background: #edf4ff;
+      border: 1px solid #d7e7ff;
+      border-radius: 12px;
+      padding: 19px;
+    }
+
+    .support-box strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .support-box p {
+      font-size: 13px;
+      color: #475467;
+    }
+
+    .login-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 12px 35px rgba(16, 47, 71, 0.08);
+    }
+
+    .login-card h2 {
+      color: var(--primary);
+      font-size: 26px;
+      margin-bottom: 7px;
+    }
+
+    .subtext {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 27px;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    label {
+      display: block;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      height: 47px;
+      border: 1px solid #cfd5dc;
+      border-radius: 8px;
+      padding: 0 13px;
+      font: inherit;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(47,128,237,.10);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 72px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .login-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin: -3px 0 22px;
+      font-size: 12px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #475467;
+    }
+
+    .remember input {
+      width: 15px;
+      height: 15px;
+    }
+
+    .forgot {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .login-submit {
+      width: 100%;
+      min-height: 48px;
+      border: none;
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .register-link a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 13px;
+    }
+
+    .message.error {
+      display: block;
+      color: var(--danger);
+      background: #fff5f4;
+      border: 1px solid #fecdca;
+    }
+
+    .message.success {
+      display: block;
+      color: var(--success);
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+    }
+
+    .prototype-note {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .login-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .login-intro {
+        text-align: center;
+      }
+
+      .login-intro p,
+      .support-box {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-actions {
+        display: none;
+      }
+
+      .login-page {
+        padding: 40px 0 55px;
+      }
+
+      .login-card {
+        padding: 27px 19px;
+      }
+
+      .student-info {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        <div class="logo-icon">S</div>
+
+        <div class="logo-text">
+          SAASSP
+          <small>Academic Advisory & Student Success</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="about.html">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="register.html" class="button button-outline">
+          Create Account
+        </a>
+      </div>
+
+      <button
+        class="menu-button"
+        onclick="toggleMenu()"
+        aria-label="Open navigation"
+        aria-expanded="false">
+        ☰
+      </button>
+
+    </div>
+  </header>
+
+  <main class="login-page">
+
+    <div class="container login-layout">
+
+      <section class="login-intro">
+
+        <div class="eyebrow">
+          Welcome back
+        </div>
+
+        <h1>
+          Access your academic decision support.
+        </h1>
+
+        <p>
+          Sign in to access your SAASSP dashboard, academic information,
+          module recommendations, qualification-progress information and
+          other features available to your account role.
+        </p>
+
+        <div class="support-box">
+
+          <strong>
+            Role-based access
+          </strong>
+
+          <p>
+            Students and Academic Staff are directed to the features
+            available to their role after authentication.
+            Administrator access is managed separately.
+          </p>
+
+        </div>
+
+      </section>
+
+      <section class="login-card">
+
+        <h2>
+          Login
+        </h2>
+
+        <p class="subtext">
+          Enter the credentials associated with your SAASSP account.
+        </p>
+
+        <div id="formMessage" class="message"></div>
+
+        <form id="loginForm">
+
+          <div class="form-group">
+
+            <label for="username">
+              Username
+            </label>
+
+            <input
+              type="text"
+              id="username"
+              autocomplete="username"
+              required
+            >
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="password">
+              Password
+            </label>
+
+            <div class="password-wrap">
+
+              <input
+                type="password"
+                id="password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                class="show-password"
+                type="button"
+                onclick="togglePassword()">
+                Show
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="login-options">
+
+            <label class="remember">
+              <input type="checkbox" id="remember">
+              <span>Remember me</span>
+            </label>
+
+            <a
+              href="#"
+              class="forgot"
+              onclick="showRecoveryMessage(event)">
+              Forgot password?
+            </a>
+
+          </div>
+
+          <button
+            type="submit"
+            class="button button-primary login-submit">
+            Login
+          </button>
+
+          <div class="register-link">
+            Don't have an account?
+            <a href="register.html">
+              Create Account
+            </a>
+          </div>
+
+          <div class="prototype-note">
+            This local browser version uses the account information
+            created through the SAASSP Create Account screen.
+          </div>
+
+        </form>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    function togglePassword() {
+
+      const password = document.getElementById("password");
+      const button = document.querySelector(".show-password");
+
+      if (password.type === "password") {
+        password.type = "text";
+        button.textContent = "Hide";
+      } else {
+        password.type = "password";
+        button.textContent = "Show";
+      }
+
+    }
+
+    function showRecoveryMessage(event) {
+
+      event.preventDefault();
+
+      const message = document.getElementById("formMessage");
+
+      message.className = "message error";
+
+      message.textContent =
+        "Password recovery is not yet implemented in this prototype.";
+
+    }
+
+    async function hashPassword(text) {
+
+      const data = new TextEncoder().encode(text);
+
+      const hash = await crypto.subtle.digest(
+        "SHA-256",
+        data
+      );
+
+      return Array
+        .from(new Uint8Array(hash))
+        .map(byte => byte.toString(16).padStart(2, "0"))
+        .join("");
+
+    }
+
+    document
+      .getElementById("loginForm")
+      .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const message =
+          document.getElementById("formMessage");
+
+        const username =
+          document.getElementById("username").value.trim();
+
+        const password =
+          document.getElementById("password").value;
+
+        const passwordHash =
+          await hashPassword(password);
+
+        const accounts =
+          JSON.parse(
+            localStorage.getItem("saassp_accounts") || "[]"
+          );
+
+        const account =
+          accounts.find(function(account) {
+
+            return (
+              account.username.toLowerCase() === username.toLowerCase() &&
+              account.password_hash === passwordHash
+            );
+
+          });
+
+        if (!account) {
+
+          message.className = "message error";
+
+          message.textContent =
+            "Incorrect username or password.";
+
+          return;
+
+        }
+
+        localStorage.setItem(
+          "saassp_current_user",
+          JSON.stringify(account)
+        );
+
+        message.className = "message success";
+
+        message.textContent =
+          "Login successful.";
+
+        setTimeout(function() {
+
+          if (account.role === "student") {
+
+            window.location.href =
+              "student-dashboard.html";
+
+          } else if (
+            account.role === "academic_staff"
+          ) {
+
+            window.location.href =
+              "academic-staff-dashboard.html";
+
+          }
+
+        }, 500);
+
+      });
+
+    function toggleMenu() {
+
+      const nav =
+        document.querySelector(".nav-links");
+
+      const menuButton =
+        document.querySelector(".menu-button");
+
+      const isOpen =
+        nav.classList.contains("mobile-open");
+
+      if (isOpen) {
+
+        nav.classList.remove("mobile-open");
+
+        nav.style.display = "none";
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      } else {
+
+        nav.classList.add("mobile-open");
+
+        nav.style.display = "flex";
+        nav.style.flexDirection = "column";
+        nav.style.position = "absolute";
+        nav.style.top = "74px";
+        nav.style.left = "0";
+        nav.style.right = "0";
+        nav.style.background = "#ffffff";
+        nav.style.padding = "20px";
+        nav.style.borderBottom =
+          "1px solid #e4e7ec";
+        nav.style.alignItems = "flex-start";
+        nav.style.gap = "18px";
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
